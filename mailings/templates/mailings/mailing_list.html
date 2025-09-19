@@ -1,0 +1,38 @@
+{% extends 'clients/base.html' %}
+{% block title %}Главная Рассылки{%endblock%}
+{%block content%}
+{% include 'clients/header.html' %}
+
+<h1>Рассылки</h1>
+<a href="{% url 'mailings:mailing_create' %}" class="btn btn-success">Новая рассылка</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Тема</th>
+            <th>Статус</th>
+            <th>Время начала</th>
+            <th>Время окончания</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mailing in mailings %}
+        <tr>
+            <td>{{ mailing.message.subject }}</td>
+            <td>{{ mailing.get_status_display }}</td>
+            <td>{{ mailing.start_date }}</td>
+            <td>{{ mailing.end_date }}</td>
+            <td>
+                <a href="{% url 'mailings:mailing_detail' mailing.pk %}" class="btn btn-info">Просмотр</a>
+                <a href="{% url 'mailings:mailing_update' mailing.pk %}" class="btn btn-warning">Редактировать</a>
+                <a href="{% url 'mailings:mailing_delete' mailing.pk %}" class="btn btn-danger">Удалить</a>
+                <a href="{% url 'mailings:send_mailing_now' mailing.pk %}" class="btn btn-primary">Отправить сейчас</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">Рассылки не найдены</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,26 @@
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            max-width: 700px;
+            margin: auto;
+        }
+        .product-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+        .product-meta {
+            font-size: 0.95rem;
+            color: #6c757d;
+        }
+        .btn-back {
+            display: inline-block;
+            margin-top: 1rem;
+        }
+    </style>

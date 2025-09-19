@@ -24,7 +24,6 @@ static_root/
 .env.test.local
 .env.production.local
 .env.example
-
 # OS generated files
 .DS_Store
 Thumbs.db
