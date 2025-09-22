@@ -1,10 +1,14 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.core.mail import send_mail
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.utils.decorators import method_decorator
+from django.views.generic import CreateView, UpdateView
 
-from .forms import UserRegisterForm, CustomLoginForm
+from .forms import UserRegisterForm, CustomLoginForm, ProfileForm
 
 
 class RegisterView(CreateView):
@@ -41,3 +45,20 @@ class RegisterView(CreateView):
 class CustomLoginView(LoginView):
     authentication_form = CustomLoginForm
     template_name = "users/login.html"
+
+
+@login_required
+def profile_view(request):
+    user = request.user
+    return render(request, 'users/profile.html', {'user': user})
+
+
+@method_decorator(login_required, name='dispatch')
+class ProfileUpdateView(UpdateView):
+    model = User
+    form_class = ProfileForm
+    template_name = 'users/profile_edit.html'
+    success_url = '/users/profile/'  # или reverse_lazy('users:profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user

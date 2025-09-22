@@ -20,6 +20,14 @@ class MailingForm(forms.ModelForm):
         label="Получатели",
     )
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)  # ← извлекаем user
+        super().__init__(*args, **kwargs)
+
+        if self.user:
+            self.fields['message'].queryset = self.fields['message'].queryset.filter(owner=self.user)
+            self.fields['clients'].queryset = MailingClient.objects.filter(owner=self.user)
+
     class Meta:
         model = Mailing
         fields = ["start_date", "end_date", "message", "clients"]
@@ -32,3 +40,9 @@ class MailingForm(forms.ModelForm):
             ),
             "message": forms.Select(attrs={"class": "form-control"}),
         }
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if not instance.pk:
+            instance.owner = self.user
+        return super().save(commit)

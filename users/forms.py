@@ -53,3 +53,18 @@ class CustomLoginForm(AuthenticationForm):
                 "class": "form-control",
             }
         )
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['email', 'phone_number', 'avatar']
+        widgets = {
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+        labels = {
+            'email': 'Email',
+            'phone_number': 'Телефон',
+            'avatar': 'Аватар',
+        }

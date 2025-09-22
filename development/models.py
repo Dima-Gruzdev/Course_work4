@@ -1,5 +1,7 @@
 from django.db import models
 
+from config import settings
+
 
 class MailingClient(models.Model):
     email = models.EmailField(
@@ -19,6 +21,7 @@ class MailingClient(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Владелец")
 
     class Meta:
         verbose_name = "Получатель рассылки"
