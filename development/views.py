@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
@@ -13,7 +14,7 @@ from .forms import ClientForm
 
 
 @method_decorator(cache_page(60 * 15), name="dispatch")
-class ClientListView(ListView):
+class ClientListView(LoginRequiredMixin, ListView):
     """Список всех клиентов"""
 
     model = MailingClient
@@ -25,7 +26,7 @@ class ClientListView(ListView):
 
 
 @method_decorator(cache_page(60 * 15), name="dispatch")
-class ClientDetailView(DetailView):
+class ClientDetailView(LoginRequiredMixin, DetailView):
     """Просмотр одного клиента"""
 
     model = MailingClient
@@ -36,7 +37,7 @@ class ClientDetailView(DetailView):
         return MailingClient.objects.filter(owner=self.request.user)
 
 
-class ClientCreateView(CreateView):
+class ClientCreateView(LoginRequiredMixin, CreateView):
     """Создание клиента"""
 
     model = MailingClient
@@ -49,7 +50,7 @@ class ClientCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ClientUpdateView(UpdateView):
+class ClientUpdateView(LoginRequiredMixin, UpdateView):
     """Редактирование клиента"""
 
     model = MailingClient
@@ -61,7 +62,7 @@ class ClientUpdateView(UpdateView):
         return MailingClient.objects.filter(owner=self.request.user)
 
 
-class ClientDeleteView(DeleteView):
+class ClientDeleteView(LoginRequiredMixin, DeleteView):
     """Удаление клиента"""
 
     model = MailingClient
