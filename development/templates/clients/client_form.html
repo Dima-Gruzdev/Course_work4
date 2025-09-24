@@ -1,0 +1,16 @@
+{% extends 'clients/base.html' %}
+{% block title %}{% if object %}Редактировать клиента{% else %}Добавить клиента{% endif %}{%endblock%}
+{%block content%}
+{% include 'clients/header.html' %}
+
+<div class="container mt-4">
+    <h1>{% if object %}Редактировать клиента{% else %}Добавить клиента{% endif %}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{% if object %}Сохранить{% else %}Добавить{% endif %}</button>
+        <a href="{% url 'development:client_list' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}

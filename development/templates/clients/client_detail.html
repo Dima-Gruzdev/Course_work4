@@ -1,0 +1,16 @@
+{% extends 'clients/base.html' %}
+{% block title %}{{ client.fio }} {%endblock%}
+{%block content%}
+{% include 'clients/header.html' %}
+
+<div class="container mt-4">
+    <h1>{{ client.fio }}</h1>
+    <p><strong>Email:</strong> {{ client.email }}</p>
+    <p><strong>Комментарий:</strong> {{ client.comment|default:"—" }}</p>
+    <p><strong>Дата создания:</strong> {{ client.created_at }}</p>
+
+    <a href="{% url 'development:client_update' client.pk %}" class="btn btn-warning">Редактировать</a>
+    <a href="{% url 'development:client_delete' client.pk %}" class="btn btn-danger">Удалить</a>
+    <a href="{% url 'development:client_list' %}" class="btn btn-secondary">Назад к списку</a>
+</div>
+{% endblock %}

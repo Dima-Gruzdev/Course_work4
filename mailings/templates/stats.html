@@ -1,0 +1,38 @@
+{% extends 'clients/base.html' %}
+{% block title %}Skystore{%endblock%}
+{%block content%}
+{% include 'clients/header.html' %}
+
+
+
+<h1>Статистика рассылок</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Всего попыток</h5>
+                <p class="card-text display-6">{{ total_attempts }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Успешных</h5>
+                <p class="card-text display-6">{{ success_count }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Неуспешных</h5>
+                <p class="card-text display-6">{{ failed_count }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="{% url 'mailings:mailing_list' %}" class="btn btn-outline-secondary">К рассылкам</a>
+{% endblock %}

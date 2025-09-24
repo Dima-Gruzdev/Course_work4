@@ -1,0 +1,14 @@
+{% extends 'clients/base.html' %}
+{% block title %}Создание рассылки{%endblock%}
+{%block content%}
+{% include 'clients/header.html' %}
+
+<h1>{% if object %}Редактировать рассылку{% else %}Создать рассылку{% endif %}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% if object %}Сохранить{% else %}Создать{% endif %}</button>
+    <a href="{% url 'mailings:mailing_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}

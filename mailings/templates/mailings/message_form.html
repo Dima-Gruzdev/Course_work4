@@ -1,0 +1,14 @@
+{% extends 'clients/base.html' %}
+{% block title %}Добавить сообщение{%endblock%}
+{%block content%}
+{% include 'clients/header.html' %}
+
+<h1>{% if object %}Редактировать сообщение{% else %}Создать сообщение{% endif %}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% if object %}Сохранить{% else %}Создать{% endif %}</button>
+    <a href="{% url 'mailings:message_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{%endblock%}
