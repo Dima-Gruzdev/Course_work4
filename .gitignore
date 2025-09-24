@@ -18,13 +18,13 @@ static_root/
 *.swo
 
 # Env variables
+.venv1/
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 .env.example
-
 # OS generated files
 .DS_Store
 Thumbs.db

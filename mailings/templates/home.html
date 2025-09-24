@@ -1,0 +1,12 @@
+{% extends 'clients/base.html' %}
+{% block title %}Skystore{%endblock%}
+{%block content%}
+{% include 'clients/header.html' %}
+
+<h1>Статистика</h1>
+<ul>
+    <li><strong>Всего рассылок:</strong> {{ total_mailings }}</li>
+    <li><strong>Активных рассылок:</strong> {{ active_mailings }}</li>
+    <li><strong>Уникальных получателей:</strong> {{ unique_clients }}</li>
+</ul>
+{% endblock %}
